@@ -1,5 +1,7 @@
 ﻿using Devpack.Extensions.Types;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("Devpack.ObjectValues.Tests")]
 namespace Devpack.ObjectValues.Phones
 {
     internal static class PhoneFactory
@@ -8,34 +10,31 @@ namespace Devpack.ObjectValues.Phones
         {
             var onlyDigits = value.GetOnlyDigits().TrimStart('0');
 
-            if (!onlyDigits?.Length.IsBetween(10, 14) != true)
+            if (onlyDigits?.Length.IsBetween(11, 14) != true)
                 return new Phone();
 
-            return FormatAsCellPhone(value);
+            return FormatAsCellPhone(onlyDigits);
         }
 
-        public static Phone CreateLandLineNumber(string value)
+        public static Phone CreateLandlineNumber(string value)
         {
             var onlyDigits = value.GetOnlyDigits().TrimStart('0');
 
-            if (!onlyDigits?.Length.IsBetween(10, 13) != true)
+            if (onlyDigits?.Length.IsBetween(10, 13) != true)
                 return new Phone();
 
-            return FormatAsLandline(value);
+            return FormatAsLandline(onlyDigits!);
         }
 
         private static Phone FormatAsCellPhone(string value)
         {
             var validDigits = value;
 
-            if (value.Length == 10)
-                validDigits = $"{value[..^8]}9{value[^8..]}";
-
-            else if (value.Length > 11)
+            if (value.Length > 11)
                 validDigits = value[^11..];
 
-            var ddd = validDigits[..^8];
-            var number = validDigits[^8..];
+            var ddd = validDigits[..^9];
+            var number = validDigits[^9..];
 
             return new Phone(ddd, number, PhoneType.CellPhone);
         }

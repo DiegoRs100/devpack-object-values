@@ -1,5 +1,4 @@
-﻿using Devpack.Extensions.Types;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 
 namespace Devpack.ObjectValues.Phones
 {
@@ -29,7 +28,7 @@ namespace Devpack.ObjectValues.Phones
 
             var phoneAux = phoneType == PhoneType.CellPhone
                 ? PhoneFactory.CreateCellPhoneNumber(number)
-                : PhoneFactory.CreateLandLineNumber(number);
+                : PhoneFactory.CreateLandlineNumber(number);
 
             if (phoneAux.IsValid)
                 phone = phoneAux;
@@ -72,10 +71,10 @@ namespace Devpack.ObjectValues.Phones
 
         private bool Validate()
         {
-            var isValid = PhoneHelper.ValidDddRegex.IsMatch(Ddd)
+            var isValid = Ddd != null 
+                && PhoneHelper.ValidDddRegex.IsMatch(Ddd)
                 && Number?.Length == 9
-                && Number[0] == '9'
-                && Number[1].In(PhoneHelper.CellPhoneFirstValidDigit);
+                && Number[0] == '9';
 
             return isValid;
         }
