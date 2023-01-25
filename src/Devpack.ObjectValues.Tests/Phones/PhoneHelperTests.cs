@@ -2,7 +2,7 @@
 using FluentAssertions;
 using Xunit;
 
-namespace Devpack.ObjectValues.Tests
+namespace Devpack.ObjectValues.Tests.Phones
 {
     public class PhoneHelperTests
     {
@@ -13,7 +13,7 @@ namespace Devpack.ObjectValues.Tests
         [InlineData("7654321")]
         [InlineData("(7)65")]
         public void GetPhoneType_WhenNotMinLenght(string number)
-        { 
+        {
             PhoneHelper.GetPhoneType(number).Should().Be(PhoneType.Invalid);
         }
 

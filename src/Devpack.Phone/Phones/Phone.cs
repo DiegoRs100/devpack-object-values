@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using Devpack.Extensions.Types;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Devpack.ObjectValues.Phones
 {
@@ -15,6 +16,27 @@ namespace Devpack.ObjectValues.Phones
             Ddd = ddd;
             Number = number;
             PhoneType = phoneType;
+        }
+
+        public static bool operator ==(Phone a, string b)
+        {
+            var result = TryParse(b, out var phone);
+            return result && phone.ToString() == a.ToString();
+        }
+
+        public static bool operator ==(string a, Phone b)
+        {
+            return b == a;
+        }
+
+        public static bool operator !=(Phone a, string b)
+        {
+            return !(a == b);
+        }
+
+        public static bool operator !=(string a, Phone b)
+        {
+            return b != a;
         }
 
         public static bool TryParse(string number, out Phone? phone)
@@ -46,17 +68,6 @@ namespace Devpack.ObjectValues.Phones
             return IsValid ? $"({Ddd}) {Number[..^4]}-{Number[^4..]}" : string.Empty;
         }
 
-        public static bool operator ==(Phone a, string b)
-        {
-            var result = TryParse(b, out var telefone);
-            return result && telefone.ToString() == a.ToString();
-        }
-
-        public static bool operator !=(Phone a, string b)
-        {
-            return !(a == b);
-        }
-
         [ExcludeFromCodeCoverage]
         public override bool Equals(object? obj)
         {
@@ -71,12 +82,15 @@ namespace Devpack.ObjectValues.Phones
 
         private bool Validate()
         {
-            var isValid = Ddd != null 
-                && PhoneHelper.ValidDddRegex.IsMatch(Ddd)
-                && Number?.Length == 9
-                && Number[0] == '9';
+            var isValid = Ddd != null && PhoneHelper.ValidDddRegex.IsMatch(Ddd);
 
-            return isValid;
+            if (PhoneType == PhoneType.CellPhone)
+                return isValid && Number?.Length == 9 && Number[0] == '9';
+
+            if (PhoneType == PhoneType.Landline)
+                return isValid && Number?.Length == 8 && Number[0].In(PhoneHelper.LandlineFirstValidDigit);
+
+            return false;
         }
     }
 }

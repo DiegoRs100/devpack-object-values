@@ -2,7 +2,7 @@
 using FluentAssertions;
 using Xunit;
 
-namespace Devpack.ObjectValues.Tests
+namespace Devpack.ObjectValues.Tests.Phones
 {
     public class PhoneFactoryTests
     {
@@ -16,7 +16,7 @@ namespace Devpack.ObjectValues.Tests
             phone.PhoneType.Should().Be(PhoneType.Invalid);
         }
 
-        [Theory(DisplayName = "Deve montar um telefone celular quando um número com tamanhp válido for passado.")]
+        [Theory(DisplayName = "Deve montar um telefone celular quando um número com tamanho válido for passado.")]
         [InlineData("+455 (11) 94424-0207", "11", "944240207")]
         [InlineData("5511944240200", "11", "944240200")]
         [InlineData("14942402071", "14", "942402071")]
