@@ -286,19 +286,19 @@ namespace Devpack.ObjectValues.Tests.Phones
         [Theory(DisplayName = "Deve retornar o telefone formatdo no modelo (00) 00000-0000 quando o número é válido.")]
         [InlineData("11951111111", "(11) 95111-1111")]
         [InlineData("1151111111", "(11) 5111-1111")]
-        public void GetFormattedNumber_Valid(string phoneNumber, string expectedFormattedPhone)
+        public void ToFormattedString_Valid(string phoneNumber, string expectedFormattedPhone)
         {
             _ = Phone.TryParse(phoneNumber, out var phone);
-            var formattedPhone = phone!.Value.GetFormattedNumber();
+            var formattedPhone = phone!.Value.ToFormattedString();
 
             formattedPhone.Should().Be(expectedFormattedPhone);
         }
 
         [Fact(DisplayName = "Deve retornar uma string vazia quando os dados do telefone forem nulos ou vazios (GetFormattedNumber).")]
-        public void GetFormattedNumber_Invalid()
+        public void ToFormattedString_Invalid()
         {
             var phone = new Phone();
-            var formattedPhone = phone.GetFormattedNumber();
+            var formattedPhone = phone.ToFormattedString();
 
             formattedPhone.Should().BeEmpty();
         }

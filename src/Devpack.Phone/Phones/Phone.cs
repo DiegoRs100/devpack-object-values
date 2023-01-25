@@ -63,7 +63,7 @@ namespace Devpack.ObjectValues.Phones
             return IsValid ? $"{Ddd}{Number}" : string.Empty;
         }
 
-        public string GetFormattedNumber()
+        public string ToFormattedString()
         {
             return IsValid ? $"({Ddd}) {Number[..^4]}-{Number[^4..]}" : string.Empty;
         }
