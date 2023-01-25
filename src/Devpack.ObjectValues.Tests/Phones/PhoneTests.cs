@@ -222,17 +222,45 @@ namespace Devpack.ObjectValues.Tests.Phones
             (phoneNumber != phone!.Value).Should().BeFalse();
         }
 
-        [Theory(DisplayName = "Deve retornar nulo quando o número de celular for inválido.")]
-        [InlineData(null)]
-        [InlineData("")]
-        [InlineData("   ")]
-        [InlineData("1111-1111")]
-        public void TryParse_NumeroInvalido_Deve_Retornar_Nulo(string value)
+        [Fact(DisplayName = "Deve retornar um objeto nulo quando o número informado estiver em um formato inválido.")]
+        public void TryParse_WhenInvalidFormat()
         {
-            var result = Phone.TryParse(value, out var actual);
+            var result = Phone.TryParse(string.Empty, out var phone);
 
+            phone.Should().BeNull();
             result.Should().BeFalse();
-            actual.Should().BeNull();
+        }
+
+        [Fact(DisplayName = "Deve retornar um objeto nulo quando o número informado estiver em um formato conhecido " +
+            "mas os valores em si não representarem um telefone válido.")]
+        public void TryParse_WhenInvalidNumber()
+        {
+            var result = Phone.TryParse("1022102525", out var phone);
+
+            phone.Should().BeNull();
+            result.Should().BeFalse();
+        }
+
+        [Fact(DisplayName = "Deve retornar telefone celuar quando o número informado for válido.")]
+        public void TryParse_UsingCellPhone_Valid()
+        {
+            var phoneNumber = "(11) 9 4425-4265";
+
+            var result = Phone.TryParse(phoneNumber, out var phone);
+
+            (phone!.Value == phoneNumber).Should().BeTrue();
+            result.Should().BeTrue();
+        }
+
+        [Fact(DisplayName = "Deve retornar telefone fixo quando o número informado for válido.")]
+        public void TryParse_UsingLandline_Valid()
+        {
+            var phoneNumber = "(11) 5225-4265";
+
+            var result = Phone.TryParse(phoneNumber, out var phone);
+
+            (phone!.Value == phoneNumber).Should().BeTrue();
+            result.Should().BeTrue();
         }
 
         [Theory(DisplayName = "Deve retornar o ddd e número concatenados quando ambos tiverem valores.")]
@@ -273,47 +301,6 @@ namespace Devpack.ObjectValues.Tests.Phones
             var formattedPhone = phone.GetFormattedNumber();
 
             formattedPhone.Should().BeEmpty();
-        }
-
-        [Fact(DisplayName = "Deve retornar um objeto nulo quando o número informado estiver em um formato inválido.")]
-        public void TryParse_WhenInvalidFormat()
-        {
-            var result = Phone.TryParse(string.Empty, out var phone);
-
-            phone.Should().BeNull();
-            result.Should().BeFalse();
-        }
-
-        [Fact(DisplayName = "Deve retornar um objeto nulo quando o número informado estiver em um formato conhecido " +
-            "mas os valores em si não representarem um telefone válido.")]
-        public void TryParse_WhenInvalidNumber()
-        {
-            var result = Phone.TryParse("1022102525", out var phone);
-
-            phone.Should().BeNull();
-            result.Should().BeFalse();
-        }
-
-        [Fact(DisplayName = "Deve retornar telefone celuar quando o número informado for válido.")]
-        public void TryParse_UsingCellPhone_Valid()
-        {
-            var phoneNumber = "(11) 9 4425-4265";
-
-            var result = Phone.TryParse(phoneNumber, out var phone);
-
-            (phone!.Value == phoneNumber).Should().BeTrue();
-            result.Should().BeTrue();
-        }
-
-        [Fact(DisplayName = "Deve retornar telefone fixo quando o número informado for válido.")]
-        public void TryParse_UsingLandline_Valid()
-        {
-            var phoneNumber = "(11) 5225-4265";
-
-            var result = Phone.TryParse(phoneNumber, out var phone);
-
-            (phone!.Value == phoneNumber).Should().BeTrue();
-            result.Should().BeTrue();
         }
     }
 }

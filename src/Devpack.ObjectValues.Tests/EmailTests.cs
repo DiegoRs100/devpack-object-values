@@ -1,6 +1,5 @@
 ﻿using Bogus;
 using Devpack.ObjectValues.Emails;
-using Devpack.ObjectValues.Phones;
 using FluentAssertions;
 using Xunit;
 
@@ -87,6 +86,34 @@ namespace Devpack.ObjectValues.Tests
 
             (email != address).Should().BeFalse();
             (address != email).Should().BeFalse();
+        }
+
+        [Fact(DisplayName = "Deve retornar um objeto nulo quando o email informado for inválido.")]
+        public void TryParse_WhenInvalidEmail()
+        {
+            var result = Email.TryParse(string.Empty, out var email);
+
+            email.Should().BeNull();
+            result.Should().BeFalse();
+        }
+
+        [Fact(DisplayName = "Deve retornar um objeto de email instanciado quando o email informado for válido.")]
+        public void TryParse_WhenValidEmail()
+        {
+            var address = _faker.Internet.Email();
+            var result = Email.TryParse(address, out var email);
+
+            (address == email.Value).Should().BeTrue();
+            result.Should().BeTrue();
+        }
+
+        [Fact(DisplayName = "Deve retornar o endereço de email no formato de uma string quando o email for construído corretamente.")]
+        public void ToString_Valid()
+        {
+            var address = _faker.Internet.Email();
+            _ = Email.TryParse(address, out var email);
+
+            email.ToString().Should().Be(address);
         }
     }
 }
