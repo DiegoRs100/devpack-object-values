@@ -3,3 +3,4 @@
 // EMAIL
 // CNPJ
 // RG
+// CPF

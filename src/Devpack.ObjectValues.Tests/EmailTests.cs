@@ -1,5 +1,4 @@
 ﻿using Bogus;
-using Devpack.ObjectValues.Emails;
 using FluentAssertions;
 using Xunit;
 

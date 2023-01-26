@@ -1,10 +1,8 @@
 ﻿using Devpack.Extensions.Types;
-using Devpack.ObjectValues.Emails;
 using System.Diagnostics.CodeAnalysis;
-using System.Net;
 using System.Text.RegularExpressions;
 
-namespace Devpack.ObjectValues.Ceps
+namespace Devpack.ObjectValues
 {
     public readonly struct Cep
     {
@@ -14,7 +12,7 @@ namespace Devpack.ObjectValues.Ceps
 
         public Cep(string cep)
         {
-            Number= cep;
+            Number = cep.GetOnlyDigits();
         }
 
         public static bool operator ==(Cep a, string b)
@@ -57,7 +55,7 @@ namespace Devpack.ObjectValues.Ceps
 
         public string ToFormattedString()
         {
-            return IsValid ? $"{Number[..^3]}-{Number[^5..]}" : string.Empty;
+            return IsValid ? $"{Number[..^3]}-{Number[^3..]}" : string.Empty;
         }
 
         [ExcludeFromCodeCoverage]

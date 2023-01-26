@@ -2,7 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 
-namespace Devpack.ObjectValues.Emails
+namespace Devpack.ObjectValues
 {
     public readonly struct Email
     {
