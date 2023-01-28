@@ -85,7 +85,7 @@ namespace Devpack.ObjectValues.Phones
             var isValid = Ddd != null && PhoneHelper.ValidDddRegex.IsMatch(Ddd);
 
             if (PhoneType == PhoneType.CellPhone)
-                return isValid && Number?.Length == 9 && Number[0] == '9';
+                return isValid && Number?.Length == 9 && Number[0] == '9' && Number[1] != '0';
 
             if (PhoneType == PhoneType.Landline)
                 return isValid && Number?.Length == 8 && Number[0].In(PhoneHelper.LandlineFirstValidDigit);

@@ -20,7 +20,7 @@ namespace Devpack.ObjectValues
         public static bool operator ==(Email a, string b)
         {
             var result = TryParse(b, out var email);
-            return result && email.Value.Address == a.Address;
+            return result && email!.Value.Address == a.Address;
         }
 
         public static bool operator ==(string a, Email b)

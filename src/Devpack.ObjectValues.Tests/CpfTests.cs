@@ -43,8 +43,8 @@ namespace Devpack.ObjectValues.Tests
         [InlineData("112334110088")]
         public void IsValid_BeFalse(string cpfNumber)
         {
-            var cep = new Cep(cpfNumber);
-            cep.IsValid.Should().BeFalse();
+            var cpf = new Cpf(cpfNumber);
+            cpf.IsValid.Should().BeFalse();
         }
 
         [Theory(DisplayName = "Deve inicializar corretamente o CPF sem caracteres especiais quando o objeto for instanciado.")]
@@ -70,7 +70,7 @@ namespace Devpack.ObjectValues.Tests
         public void Compare_BeFalse()
         {
             var cpfString = _faker.Person.Cpf();
-            var cpf = new Cpf(_faker.Address.ZipCode());
+            var cpf = new Cpf("129.162.080-03");
 
             (cpf == cpfString).Should().BeFalse();
             (cpfString == cpf).Should().BeFalse();
@@ -80,7 +80,7 @@ namespace Devpack.ObjectValues.Tests
         public void Uncompare_BeTrue()
         {
             var cpfString = _faker.Person.Cpf();
-            var cpf = new Cpf(_faker.Address.ZipCode());
+            var cpf = new Cpf("129.162.080-03");
 
             (cpf != cpfString).Should().BeTrue();
             (cpfString != cpf).Should().BeTrue();
@@ -124,7 +124,7 @@ namespace Devpack.ObjectValues.Tests
             cpf.ToString().Should().Be(cpfString.GetOnlyDigits());
         }
 
-        [Fact(DisplayName = "Deve retornar o cep formatdo no modelo 00000-000 quando o número é válido.")]
+        [Fact(DisplayName = "Deve retornar o CPF formatdo no modelo 000.000.000-00 quando o número é válido.")]
         public void ToFormattedString_Valid()
         {
             _ = Cpf.TryParse("11233411098", out var cpf);

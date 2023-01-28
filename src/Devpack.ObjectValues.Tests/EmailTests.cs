@@ -102,7 +102,7 @@ namespace Devpack.ObjectValues.Tests
             var address = _faker.Internet.Email();
             var result = Email.TryParse(address, out var email);
 
-            (address == email.Value).Should().BeTrue();
+            (address == email!.Value).Should().BeTrue();
             result.Should().BeTrue();
         }
 

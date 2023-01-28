@@ -126,6 +126,8 @@ namespace Devpack.ObjectValues.Tests.Phones
         [InlineData("")]
         [InlineData("   ")]
         [InlineData("1111-1111")]
+        [InlineData("0111-1111")]
+        [InlineData("90111-1111")]
         public void IsValid_BeFalse_WhenCellPhone(string number)
         {
             var phone = new Phone("11", number, PhoneType.CellPhone);
