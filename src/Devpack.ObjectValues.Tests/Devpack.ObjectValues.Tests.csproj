@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Devpack.Phone\Devpack.ObjectValues.csproj" />
+    <ProjectReference Include="..\Devpack.ObjectValues\Devpack.ObjectValues.csproj" />
   </ItemGroup>
 
 </Project>
