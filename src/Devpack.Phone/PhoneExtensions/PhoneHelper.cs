@@ -1,7 +1,7 @@
 ﻿using Devpack.Extensions.Types;
 using System.Text.RegularExpressions;
 
-namespace Devpack.ObjectValues.Phones
+namespace Devpack.ObjectValues.PhoneExtensions
 {
     public static class PhoneHelper
     {
@@ -21,8 +21,8 @@ namespace Devpack.ObjectValues.Phones
             {
                 var eigthDigit = number.Substring(number.Length - 8, 1).First();
 
-                return eigthDigit.In(LandlineFirstValidDigit) 
-                    ? PhoneType.Landline 
+                return eigthDigit.In(LandlineFirstValidDigit)
+                    ? PhoneType.Landline
                     : PhoneType.Invalid;
             }
 

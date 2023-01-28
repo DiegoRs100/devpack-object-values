@@ -1,9 +1,10 @@
 ﻿using Devpack.Extensions.Types;
+using Devpack.ObjectValues.Interfaces;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Devpack.ObjectValues
 {
-    public readonly struct Cnpj
+    public readonly struct Cnpj : IIdentifier
     {
         public string Number { get; }
 

@@ -1,9 +1,11 @@
 ﻿using Devpack.Extensions.Types;
+using Devpack.ObjectValues.Interfaces;
+using Devpack.ObjectValues.PhoneExtensions;
 using System.Diagnostics.CodeAnalysis;
 
-namespace Devpack.ObjectValues.Phones
+namespace Devpack.ObjectValues
 {
-    public readonly struct Phone
+    public readonly struct Phone : IContact
     {
         public string Ddd { get; }
         public string Number { get; }
@@ -44,7 +46,7 @@ namespace Devpack.ObjectValues.Phones
             phone = null;
 
             var phoneType = PhoneHelper.GetPhoneType(number);
-            
+
             if (phoneType == PhoneType.Invalid)
                 return false;
 

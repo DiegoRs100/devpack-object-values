@@ -1,4 +1,4 @@
-﻿namespace Devpack.ObjectValues.Phones
+﻿namespace Devpack.ObjectValues.PhoneExtensions
 {
     public enum PhoneType
     {

@@ -2,7 +2,7 @@
 using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("Devpack.ObjectValues.Tests")]
-namespace Devpack.ObjectValues.Phones
+namespace Devpack.ObjectValues.PhoneExtensions
 {
     internal static class PhoneFactory
     {

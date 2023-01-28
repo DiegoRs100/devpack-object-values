@@ -1,10 +1,11 @@
 ﻿using Devpack.Extensions.Types;
+using Devpack.ObjectValues.Interfaces;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 
 namespace Devpack.ObjectValues
 {
-    public readonly struct Email
+    public readonly struct Email : IContact
     {
         public string Address { get; }
         public string Domain { get; }

@@ -1,9 +1,10 @@
 ﻿using Devpack.Extensions.Types;
+using Devpack.ObjectValues.Interfaces;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Devpack.ObjectValues
 {
-    public readonly struct Cpf
+    public readonly struct Cpf : IIdentifier
     {
         public string Number { get; }
 

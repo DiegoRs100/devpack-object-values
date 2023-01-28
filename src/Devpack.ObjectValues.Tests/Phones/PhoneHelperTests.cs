@@ -1,4 +1,4 @@
-﻿using Devpack.ObjectValues.Phones;
+﻿using Devpack.ObjectValues.PhoneExtensions;
 using FluentAssertions;
 using Xunit;
 
